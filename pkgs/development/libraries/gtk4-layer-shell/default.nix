@@ -7,7 +7,7 @@
 , docbook-xsl-nons
 , docbook_xml_dtd_43
 , wayland
-, gtk3
+, gtk4
 , gobject-introspection
 }:
 
