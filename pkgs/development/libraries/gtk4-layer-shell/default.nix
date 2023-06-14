@@ -8,7 +8,16 @@
 , docbook_xml_dtd_43
 , wayland
 , gtk4
+, gtk3
+, cmake
 , gobject-introspection
+# , valabind
+    # "gtk-doc"
+    # "gobject-introspection"
+    # "meson"
+    # "ninja"
+    # "valabind"
+    # "python"
 }:
 
 stdenv.mkDerivation rec {
@@ -32,11 +41,15 @@ stdenv.mkDerivation rec {
     gtk-doc
     docbook-xsl-nons
     docbook_xml_dtd_43
+    cmake
+    # valabind
   ];
 
   buildInputs = [
     wayland
+    # valabind
     gtk4
+    gtk3
   ];
 
   mesonFlags = [
