@@ -1,5 +1,6 @@
 { lib, stdenv
 , fetchFromGitHub
+, static ? true
 , meson
 , ninja
 , pkg-config
@@ -8,7 +9,8 @@
 , docbook_xml_dtd_43
 , wayland
 , gtk4
-, gtk3
+, vapi-gen
+# , gtk3
 , cmake
 , gobject-introspection
 # , valabind
@@ -30,7 +32,8 @@ stdenv.mkDerivation rec {
     owner = "wmww";
     repo = "gtk4-layer-shell";
     rev = "v${version}";
-    sha256 = "sha256-jLWXBoYcVoUSzw4OIYVM5iPvsmpy+Wg5TbDpo8cll80=";
+    # sha256 = "sha256-jLWXBoYcVoUSzw4OIYVM5iPvsmpy+Wg5TbDpo8cll80=";
+    sha256 = "sha256-8bf7O/y9gQohd9ZLc7wygUeZxtU5RAsn1PW8pg0NcAc=";
   };
 
   nativeBuildInputs = [
@@ -42,6 +45,7 @@ stdenv.mkDerivation rec {
     docbook-xsl-nons
     docbook_xml_dtd_43
     cmake
+    vapi-gen
     # valabind
   ];
 
@@ -49,11 +53,20 @@ stdenv.mkDerivation rec {
     wayland
     # valabind
     gtk4
-    gtk3
+    # gtk3
   ];
 
   mesonFlags = [
+    # "-Ddocs=true"
+    # "--prefix=/usr"
+    # "--wrap-mode=nofallback"
+    # "--buildtype=plain"
+    "-Dtests=true"
     "-Ddocs=true"
+    "-Dshared=true"
+    "-Dintrospection=true"
+    "-Dvapi=true"
+    "-Dexamples=true"
   ];
 
   meta = with lib; {
