@@ -86,9 +86,10 @@
 , gtk-doc
 , docbook-xsl-nons
 , docbook_xml_dtd_43
-, wayland-scanner
+, wayland-protocols
 , wayland
 , gtk4
+, gtk3
 , gobject-introspection
 , vala
 }:
@@ -139,10 +140,15 @@ stdenv.mkDerivation rec {
     docbook-xsl-nons
     docbook_xml_dtd_43
     vala
-    wayland-scanner
+    # wayland-scanner
   ];
 
   buildInputs = [
+    # wayland
+    wayland-protocols
+    # # valabind
+    # gtk4
+    gtk3
     wayland
     gtk4
   ];
@@ -150,6 +156,11 @@ stdenv.mkDerivation rec {
   mesonFlags = [
     "-Ddocs=true"
     "-Dexamples=true"
+    "-Dtests=true"
+    # "-Ddocs=true"
+    "-Dintrospection=true"
+    "-Dvapi=true"
+    # "-Dexamples=true"
   ];
 
   meta = with lib; {
